@@ -1,0 +1,27 @@
+# makefile for apptype, a program to determine the type of executable.
+# Environment: OS/2 and MSC 6.00A using dmake 3.8.
+#
+# Files:
+#  apptype.def   linker definition file
+#  apptype.exe   OS/2 1.x--2.x executable
+#  fapptyp.h     defines from os2emx.h
+#  makefile.msc  Microsoft C 6.00A makefile
+#
+# Darrel Hankerson hankedr@mail.auburn.edu or hank@ducvax.auburn.edu
+# 24 March 1993
+
+DEFS = -DMSC
+
+CC = cl
+CFLAGS = $(DEFS)
+
+LINK = cl
+LFLAGS = -Lp
+LFLAGS_TAIL = setargv.obj -link /NOE
+
+.c.obj :
+	$(CC) -c $(CFLAGS) $<
+
+apptype.exe : apptype.obj apptype.def
+	$(LINK) -o $@ $(LFLAGS) $< $(LFLAGS_TAIL)
+

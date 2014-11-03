@@ -1,0 +1,20 @@
+# makefile for apptype, a program to determine the type of executable.
+# Environment: OS/2 and EMX/gcc 0.8f using dmake 3.8.
+#
+# Darrel Hankerson hankedr@mail.auburn.edu or hank@ducvax.auburn.edu
+# 24 March 1993
+
+DEFS = -DEMX
+
+CC = gcc -Zomf -Zmt
+CFLAGS = $(DEFS)
+LFLAGS = 
+
+O = .obj
+
+.c$O :
+	$(CC) -c $(CFLAGS) $<
+
+apptype.exe : apptype$O
+	$(CC) -o $@ $(LFLAGS) $<
+
